@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mission Impossible 9: Operation Buddy</title>
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        background: linear-gradient(135deg, #0b0b0b, #1a1a1a);
+        color: #f5f5f5;
+        font-family: "Courier New", monospace;
+        text-align: center;
+        padding: 20px;
+        min-height: 100vh;
+      }
+
+      h1,
+      h2 {
+        color: #ff4d6d;
+      }
+
+      p {
+        line-height: 1.6;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .mission-wrapper {
+        max-width: 720px;
+        margin: 0 auto;
+      }
+
+      button {
+        background: #ff4d6d;
+        border: none;
+        color: white;
+        padding: 12px 20px;
+        margin: 10px;
+        font-size: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: transform 0.2s ease, background 0.2s ease;
+      }
+
+      button:hover {
+        background: #ff1f4c;
+        transform: translateY(-1px);
+      }
+
+      button:disabled {
+        background: #6b3842;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      input {
+        padding: 8px;
+        width: 80%;
+        max-width: 300px;
+        margin-top: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: none;
+        text-align: center;
+      }
+
+      input:focus {
+        outline: 2px solid #ff4d6d;
+      }
+
+      .question {
+        margin: 25px 0;
+        padding: 15px;
+        border: 1px solid rgba(255, 77, 109, 0.3);
+        border-radius: 12px;
+        background: rgba(0, 0, 0, 0.2);
+      }
+
+      .cipher {
+        font-size: 18px;
+        letter-spacing: 3px;
+        margin: 15px 0;
+        color: #ffd6e0;
+      }
+
+      .feedback {
+        margin-top: 10px;
+        font-weight: bold;
+        min-height: 24px;
+      }
+
+      .feedback.success {
+        color: #7af59d;
+      }
+
+      .feedback.error {
+        color: #ffb3c1;
+      }
+
+      .counter {
+        margin-top: 20px;
+        font-size: 18px;
+        color: #ffb3c1;
+      }
+
+      .status {
+        margin: 15px auto;
+        padding: 10px 14px;
+        border-radius: 10px;
+        max-width: 520px;
+        background: rgba(255, 77, 109, 0.12);
+      }
+
+      .final-message {
+        margin: 25px auto 0;
+        padding: 16px 20px;
+        border-radius: 12px;
+        max-width: 640px;
+        background: rgba(122, 245, 157, 0.12);
+        border: 1px solid rgba(122, 245, 157, 0.3);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="mission-wrapper">
+      <!-- INTRO -->
+      <div id="intro">
+        <h1>💌 Valentine’s Day Mystery Challenge 💌</h1>
+        <p>
+          Hello <strong>Jessa Russell Caroline Conley</strong>,<br /><br />
+          You’ve been selected for a <strong>top-secret Valentine’s mission</strong>.
+          This message will self-destruct emotionally (in the best way possible).
+          <br /><br />
+          ⚠️ <strong>Warning:</strong> Any incorrect answer will trigger a
+          <em>Kisses Owed Counter</em>.
+        </p>
+        <p>Do you accept this mission?</p>
+        <button id="accept">Yes, I accept 💕</button>
+        <button id="decline">No</button>
+        <div id="intro-status" class="status" aria-live="polite"></div>
+      </div>
+
+      <!-- MISSION -->
+      <div id="mission" class="hidden">
+        <h2>🕵️ Mission Objective</h2>
+        <p>
+          Your challenge is to uncover the <strong>secret Valentine letter</strong>.
+          Each correct answer reveals part of the truth.
+        </p>
+        <p>
+          All encrypted words use a <strong>Caesar Cipher</strong>. Hint: (3 digits,
+          even number, each digit is divisible by my favorite number). Decode
+          carefully 💘
+        </p>
+
+        <div class="question" data-answer="09/14/24">
+          <p>1️⃣ Grox nsn go cdkbd nkdsxq?</p>
+          <div class="cipher">09/14/24</div>
+          <input id="q1" placeholder="MM/DD/YY" autocomplete="off" />
+          <button class="submit" data-question="1">Submit</button>
+          <div class="feedback" aria-live="polite"></div>
+        </div>
+
+        <div class="question" data-answer="10/11/24">
+          <p>2️⃣ Grox gkc yeb psbcd uscc?</p>
+          <div class="cipher">10/11/24</div>
+          <input id="q2" placeholder="MM/DD/YY" autocomplete="off" />
+          <button class="submit" data-question="2">Submit</button>
+          <div class="feedback" aria-live="polite"></div>
+        </div>
+
+        <div class="question" data-answer="bkqo byyw">
+          <p>3️⃣ Grobo gkc yeb psbcd nkdo?</p>
+          <div class="cipher">bkqo byyw</div>
+          <input id="q3" placeholder="Location" autocomplete="off" />
+          <button class="submit" data-question="3">Submit</button>
+          <div class="feedback" aria-live="polite"></div>
+        </div>
+
+        <div class="question" data-answer="tocck">
+          <p>4️⃣ Gry cksn “S vyfo iye” psbcd?</p>
+          <div class="cipher">tocck</div>
+          <input id="q4" placeholder="Name" autocomplete="off" />
+          <button class="submit" data-question="4">Submit</button>
+          <div class="feedback" aria-live="polite"></div>
+        </div>
+
+        <div class="question" data-answer="dro wod">
+          <p>5️⃣ Grobo nsn go qy pyb yeb 1-iokb kxxsfobckbi?</p>
+          <div class="cipher">dro wod</div>
+          <input id="q5" placeholder="Place" autocomplete="off" />
+          <button class="submit" data-question="5">Submit</button>
+          <div class="feedback" aria-live="polite"></div>
+        </div>
+
+        <div class="question" data-answer="11/08/25">
+          <p>6️⃣ Grkd nki gkc iyeb pkfybsdo “ioc” cy pkb?</p>
+          <div class="cipher">11/08/25</div>
+          <input id="q6" placeholder="MM/DD/YY" autocomplete="off" />
+          <button class="submit" data-question="6">Submit</button>
+          <div class="feedback" aria-live="polite"></div>
+        </div>
+
+        <div class="counter">
+          💋 Kisses Owed: <span id="kisses">0</span>
+        </div>
+
+        <div id="final-message" class="final-message hidden" aria-live="polite">
+          <p><strong>✅ Mission complete!</strong> Decode this final cipher to find the letter:</p>
+          <div class="cipher">
+            Iye mkx psxn dro voddob sx Lyxxsoc qvyfo mywzkbdwoxd.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let kisses = 0;
+
+      const intro = document.getElementById("intro");
+      const mission = document.getElementById("mission");
+      const introStatus = document.getElementById("intro-status");
+      const kissesDisplay = document.getElementById("kisses");
+      const finalMessage = document.getElementById("final-message");
+      const questions = Array.from(document.querySelectorAll(".question"));
+      const totalQuestions = questions.length;
+      let correctAnswers = 0;
+
+      document.getElementById("accept").addEventListener("click", () => {
+        intro.classList.add("hidden");
+        mission.classList.remove("hidden");
+      });
+
+      document.getElementById("decline").addEventListener("click", () => {
+        introStatus.textContent =
+          "Mission declined... but I don’t accept that 😏";
+      });
+
+      const normalizeAnswer = (value) => value.trim().toLowerCase();
+      const shiftAmount = 244;
+
+      const caesarShift = (value, shift = shiftAmount) => {
+        const normalizedShift = ((shift % 26) + 26) % 26;
+        return value.replace(/[a-z]/g, (char) => {
+          const code = char.charCodeAt(0) - 97;
+          return String.fromCharCode(((code + normalizedShift) % 26) + 97);
+        });
+      };
+
+      const showFeedback = (question, isCorrect) => {
+        const feedback = question.querySelector(".feedback");
+        feedback.classList.remove("success", "error");
+        if (isCorrect) {
+          feedback.textContent = "✅ Correct. Mission continues…";
+          feedback.classList.add("success");
+        } else {
+          feedback.textContent = "❌ Incorrect. Kiss owed 💋";
+          feedback.classList.add("error");
+        }
+      };
+
+      const lockQuestion = (question) => {
+        const input = question.querySelector("input");
+        const button = question.querySelector("button");
+        input.disabled = true;
+        button.disabled = true;
+      };
+
+      questions.forEach((question) => {
+        const input = question.querySelector("input");
+        const button = question.querySelector(".submit");
+        const answer = normalizeAnswer(question.dataset.answer || "");
+
+        const check = () => {
+          const value = normalizeAnswer(input.value);
+          const encodedValue = caesarShift(value);
+          if (!value) {
+            showFeedback(question, false);
+            return;
+          }
+
+          if (encodedValue === answer) {
+            showFeedback(question, true);
+            lockQuestion(question);
+            correctAnswers += 1;
+            if (correctAnswers === totalQuestions) {
+              finalMessage.classList.remove("hidden");
+            }
+          } else {
+            kisses += 1;
+            kissesDisplay.textContent = kisses;
+            showFeedback(question, false);
+          }
+        };
+
+        button.addEventListener("click", check);
+        input.addEventListener("keypress", (event) => {
+          if (event.key === "Enter") {
+            check();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
